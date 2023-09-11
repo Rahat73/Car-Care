@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 const ServiceCard = ({ service }) => {
-  const { title, img, price } = service;
+  const { _id, title, img, price } = service;
   return (
     <div className="card bg-base-100 shadow-xl">
       <figure className="px-10 pt-10">
@@ -9,7 +11,7 @@ const ServiceCard = ({ service }) => {
         <h2 className="card-title">{title}</h2>
         <div className="card-actions items-center">
           <p>Price: ${price}</p>
-          <button className="btn btn-primary">
+          <Link to={`/services/${_id}`} className="btn btn-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -24,7 +26,7 @@ const ServiceCard = ({ service }) => {
                 d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   //checking the stored theme in the localStorage by themeChange() &
   const storedTheme = localStorage.getItem("theme");
   let theme;
@@ -38,10 +41,23 @@ const Navbar = () => {
           About
         </Link>
       </li>
+      {user?.email ? (
+        <li>
+          <Link onClick={logOut} className="font-semibold text-lg">
+            Log Out
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link className="font-semibold text-lg" to={"/login"}>
+            Login
+          </Link>
+        </li>
+      )}
     </>
   );
   return (
-    <div className="navbar bg-base-100 py-0">
+    <div className="navbar bg-base-100 py-0 sticky top-0 z-10">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
