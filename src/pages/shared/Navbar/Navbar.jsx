@@ -42,11 +42,18 @@ const Navbar = () => {
         </Link>
       </li>
       {user?.email ? (
-        <li>
-          <Link onClick={logOut} className="font-semibold text-lg">
-            Log Out
-          </Link>
-        </li>
+        <>
+          <li>
+            <Link to={"/bookings"} className="font-semibold text-lg">
+              Bookings
+            </Link>
+          </li>
+          <li>
+            <Link onClick={logOut} className="font-semibold text-lg">
+              Log Out
+            </Link>
+          </li>
+        </>
       ) : (
         <li>
           <Link className="font-semibold text-lg" to={"/login"}>
