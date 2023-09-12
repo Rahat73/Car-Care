@@ -39,7 +39,16 @@ const BookService = () => {
       });
   };
   return (
-    <div className=" w-10/12 py-8 bg-base-200 mx-auto">
+    <div className=" w-10/12 pb-8 bg-base-200 mx-auto">
+      <div
+        className="hero rounded-lg h-52"
+        style={{ backgroundImage: `url(${img})` }}
+      >
+        <div className="hero-overlay bg-opacity-60 rounded-lg"></div>
+        <div className="hero-content w-full text-neutral-content justify-start">
+          <h1 className="text-5xl font-bold">Book Service</h1>
+        </div>
+      </div>
       <h1 className=" text-2xl text-center mt-8 mb-4">
         Booking Service: <span className=" font-semibold">{title}</span>
       </h1>
@@ -56,6 +65,7 @@ const BookService = () => {
                 defaultValue={user?.displayName}
                 name="name"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -67,6 +77,7 @@ const BookService = () => {
                 name="date"
                 placeholder="Date"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -79,6 +90,7 @@ const BookService = () => {
                 defaultValue={user?.email}
                 placeholder="email"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -89,6 +101,7 @@ const BookService = () => {
                 type="text"
                 name="price"
                 placeholder="due-amount"
+                disabled
                 defaultValue={"$" + price}
                 className="input input-bordered"
               />
