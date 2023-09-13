@@ -4,6 +4,7 @@ import { FaFileAlt, FaDownload } from "react-icons/fa";
 import ourBrochure from "../../assets/pdfs/OurBrochure.pdf";
 import companyDetails from "../../assets/pdfs/CompanyDetails.pdf";
 import logo from "../../assets/logo.png";
+import ActiveLink from "../../components/ActiveLink/ActiveLink";
 
 const RightNav = ({ serviceDetails }) => {
   const [services, setServices] = useState([]);
@@ -34,28 +35,24 @@ const RightNav = ({ serviceDetails }) => {
       <div className="p-5 bg-base-200 rounded-lg">
         <h1 className="text-2xl font-bold my-3">Services</h1>
         {services.map((service) => (
-          <div
-            key={service._id}
-            className="w-full bg-base-100 my-3 p-3 rounded-md flex justify-between"
-          >
+          <ActiveLink to={`/services/${service._id}`} key={service._id}>
             <div>{service.title}</div>
-            <Link to={`/services/${service._id}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                />
-              </svg>
-            </Link>
-          </div>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+          </ActiveLink>
         ))}
       </div>
       <div className="p-8 bg-neutral my-8 rounded-lg text-white">
@@ -110,7 +107,7 @@ const RightNav = ({ serviceDetails }) => {
       </div>
       <h1 className=" text-4xl font-bold">Price: ${serviceDetails?.price}</h1>
       <Link to={`/serviceBooking/${serviceDetails?._id}`}>
-        <button className="btn btn-block my-5 bg-lime-700 text-white">
+        <button className=" animate-pulse btn btn-block my-5 bg-lime-700 text-white">
           Proceed Booking
         </button>
       </Link>

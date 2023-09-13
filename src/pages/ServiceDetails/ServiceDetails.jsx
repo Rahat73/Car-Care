@@ -17,7 +17,7 @@ const ServiceDetails = () => {
           <h1 className="text-5xl font-bold">Service Details</h1>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <CentralContent serviceDetails={serviceDetails}></CentralContent>
         <RightNav serviceDetails={serviceDetails}></RightNav>
       </div>

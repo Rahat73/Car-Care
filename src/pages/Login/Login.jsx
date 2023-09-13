@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -6,6 +6,10 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -23,6 +27,7 @@ const Login = () => {
           </p>
         );
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
