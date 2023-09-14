@@ -2,18 +2,33 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import BookingsTableRow from "./BookingsTableRow";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
+  const navigate = useNavigate();
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://car-care-server-rahat73.vercel.app/bookings?email=${user?.email}`;
 
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          "car-care-access-token"
+        )}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setBookings(data));
-  }, [url]);
+      .then((data) => {
+        if (!data.error) {
+          setBookings(data);
+        } else {
+          navigate("/");
+        }
+      });
+  }, [url, navigate]);
 
   const handleDeleteBooking = (id) => {
     Swal.fire({
@@ -26,7 +41,7 @@ const Bookings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://car-care-server-rahat73.vercel.app/bookings/${id}`, {
           method: "DELETE",
         })
           .then((result) => result.json())
@@ -65,7 +80,7 @@ const Bookings = () => {
       confirmButtonText: "Confirm!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://car-care-server-rahat73.vercel.app/bookings/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",

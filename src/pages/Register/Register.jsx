@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import SocialSignIn from "../shared/SocialSignIn/SocialSignIn";
 
 const Register = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -43,9 +47,11 @@ const Register = () => {
                 Care
               </p>
             );
+            setLoading(false);
           })
           .catch((error) => toast.error(error.message));
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };
@@ -125,6 +131,7 @@ const Register = () => {
               >
                 Login
               </Link>
+              <SocialSignIn></SocialSignIn>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import SocialSignIn from "../shared/SocialSignIn/SocialSignIn";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -82,10 +83,12 @@ const Login = () => {
               <span className="">New to Car Care?</span>
               <Link
                 to={"/register"}
+                state={location.state} //passing the state value to register that had been passed to login through private route
                 className="link link-hover px-2 text-lime-700 font-semibold"
               >
                 Register
               </Link>
+              <SocialSignIn></SocialSignIn>
             </div>
           </div>
         </div>

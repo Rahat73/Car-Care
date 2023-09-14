@@ -3,9 +3,16 @@ import logo from "../../../assets/logo.png";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => toast.error(error.meassage));
+  };
 
   //checking the stored theme in the localStorage by themeChange() &
   const storedTheme = localStorage.getItem("theme");
@@ -49,7 +56,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link onClick={logOut} className="font-semibold text-lg">
+            <Link onClick={handleLogOut} className="font-semibold text-lg">
               Log Out
             </Link>
           </li>
@@ -63,6 +70,7 @@ const Navbar = () => {
       )}
     </>
   );
+
   return (
     <div className="navbar bg-base-100 py-0 sticky top-0 z-10">
       <div className="navbar-start">
